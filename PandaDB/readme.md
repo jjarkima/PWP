@@ -12,3 +12,5 @@ How to use:
 6.	Uncomment phase 5. Tests instance update. Recomment.
 7.	Uncomment phase 6. Tests instance deletion. Recomment.
 8.	Tests done, congratulations.
+
+We gained knowledge on using SQLAlchemy and SQLite from Mahmud Ahsan's GitHub.
