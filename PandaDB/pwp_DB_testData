@@ -1,0 +1,21 @@
+DELETE FROM topics;
+DELETE FROM users;
+DELETE FROM messages;
+
+INSERT INTO users(name, password, posted_topics, posted_messages) VALUES ('dille1', 'dille', null, null);
+INSERT INTO users(name, password, posted_topics, posted_messages) VALUES ('dille2', 'dille', null, null);
+INSERT INTO users(name, password, posted_topics, posted_messages) VALUES ('dille3', 'dille', null, null);
+INSERT INTO users(name, password, posted_topics, posted_messages) VALUES ('dille4', 'dille', null, null);
+INSERT INTO users(name, password, posted_topics, posted_messages) VALUES ('dille5', 'dille', null, null);
+
+INSERT INTO topics(header, message, time) VALUES ('pervo', 'prv', null);
+INSERT INTO topics(header, message, time) VALUES ('pervo', 'prv', null);
+INSERT INTO topics(header, message, time) VALUES ('pervo', 'prv', null);
+INSERT INTO topics(header, message, time) VALUES ('pervo', 'prv', null);
+INSERT INTO topics(header, message, time) VALUES ('pervo', 'prv', null);
+
+INSERT INTO messages(parent_topic_id, message, time) VALUES (1, 'ismo', null);
+INSERT INTO messages(parent_topic_id, message, time) VALUES (2, 'ismo', null);
+INSERT INTO messages(parent_topic_id, message, time) VALUES (3, 'ismo', null);
+INSERT INTO messages(parent_topic_id, message, time) VALUES (4, 'ismo', null);
+INSERT INTO messages(parent_topic_id, message, time) VALUES (5, 'ismo', null);
