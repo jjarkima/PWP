@@ -4,8 +4,11 @@
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.engine import Engine
 from sqlalchemy import event
+from flask_sqlalchemy import SQLAlchemy
 
-from pwp import db
+#from pwp import db
+
+db = SQLAlchemy()
 
 
 

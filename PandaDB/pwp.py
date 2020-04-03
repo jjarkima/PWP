@@ -12,13 +12,16 @@ from utils import MasonBuilder, create_error_response
 from utils import MASON, LINK_RELATIONS_URL, ERROR_PROFILE
 from utils import TOPIC_PROFILE, MESSAGE_PROFILE, USER_PROFILE
 
+import models
+from models import Topic, Message, User, db
+
 app = Flask(__name__, static_folder="static")
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///development.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-db = SQLAlchemy(app)
+#db = SQLAlchemy(app)
 api = Api(app)
 
-from models import *#Topic, Message, User
+db.init_app(app)
 
 @event.listens_for(Engine, "connect")
 def set_sqlite_pragma(dbapi_connection, connection_record):
