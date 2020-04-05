@@ -1,5 +1,5 @@
 # PWP SPRING 2020
-# PROJECT NAME
+# PandaBoard API
 # Group information
 * Student 1. Tatu Laakso tatu.laakso@student.oulu.fi
 * Student 2. Jani Jarkima jani.jarkima@student.oulu.fi
