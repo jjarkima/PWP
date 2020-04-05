@@ -27,6 +27,6 @@
 
 # Running the tests
 The resource test file is based on a resource_test that can be found at lovelace.
-tests can be run with a cmd command: 
+tests can be run inside your virtual environment folder with this command:
 * `pytest --cov-report term-missing --cov=app` 
-inside your virtual environment folder
+
