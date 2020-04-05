@@ -6,7 +6,7 @@
 * Student 3. Akseli Tyvelä akseli.tyvela@student.oulu.fi
 
 
-# Getting Started with virtuale environment
+# Getting Started with virtual environment
 1. in your CMD create a folder for your virtual environment by running: `python -m venv /path/to/the/virtualenvironment` 
 2. Download requirements.txt file from this repository and place it inside the virtual environment folder
 3. In your CMD run a command: `virtualenvironment"\Scripts\activate.bat` 
@@ -14,6 +14,7 @@
  
 
 # Libraries used
+**All libraries can be found and installed from the requirements.txt**
 * flask
 * flask-sqlalchemy
 * json
@@ -22,4 +23,6 @@
 * pytest-cov
 * ipython
 * pysqlite3
+
+
 # Running the tests
