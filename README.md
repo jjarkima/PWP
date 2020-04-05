@@ -7,9 +7,11 @@
 
 
 # Getting Started with virtuale environment
-'python -m venv /path/to/the/virtualen'
-'file name"\Scripts\activate.bat'
-'pip install -r requirements.txt'
+1. Create a folder for your virtual environment 'python -m venv /path/to/the/virtualenvironment' in your CMD
+2. Download requirements.txt file from this repository and place it inside the virtual environment folder
+3. run virtualenvironment"\Scripts\activate.bat' in your CMD
+4. navigate to your created folder and run 'pip install -r requirements.txt' in your CMD
+ 
 
 # Libraries used
 * flask
