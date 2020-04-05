@@ -7,10 +7,10 @@
 
 
 # Getting Started with virtuale environment
-1. Create a folder for your virtual environment by running: `python -m venv /path/to/the/virtualenvironment` in your CMD
+1. in your CMD create a folder for your virtual environment by running: `python -m venv /path/to/the/virtualenvironment` 
 2. Download requirements.txt file from this repository and place it inside the virtual environment folder
-3. run a command: `virtualenvironment"\Scripts\activate.bat` in your CMD
-4. navigate to your created folder and run command: `pip install -r requirements.txt` in your CMD
+3. In your CMD run a command: `virtualenvironment"\Scripts\activate.bat` 
+4. In your CMD navigate to your created folder and run command: `pip install -r requirements.txt` 
  
 
 # Libraries used
