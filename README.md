@@ -12,12 +12,12 @@
 'pip install -r requirements.txt'
 
 # Libraries used
-flask
-flask-sqlalchemy
-json
-mason-builder
-pytest
-pytest-cov
-ipython
-pysqlite3
+* flask
+* flask-sqlalchemy
+* json
+* mason-builder
+* pytest
+* pytest-cov
+* ipython
+* pysqlite3
 # Running the tests
