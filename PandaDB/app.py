@@ -47,13 +47,13 @@ class BoardBuilder(MasonBuilder):
     def topic_schema():
         schema = {
             "type": "object",
-            "required": ["id", "header", "message", "date", "user_id"]
+            "required": ["header", "message", "date", "user_id"]
         }
         props = schema["properties"] = {}
-        props ["id"] = {
-            "description": "topic id",
-            "type": "number"
-        }
+        #props ["id"] = {
+        #    "description": "topic id",
+        #    "type": "number"
+        #}
         props ["header"] = {
             "description": "header",
             "type": "string"
@@ -259,7 +259,7 @@ class TopicCollection (Resource):
         body["items"] = []
         for db_topicid in Topic.query.all():
             item = BoardBuilder(
-                id=db_topicid.id,
+                #id=db_topicid.id,
                 header=db_topicid.header,
                 message=db_topicid.message,
                 date=db_topicid.date,
@@ -276,7 +276,7 @@ class TopicCollection (Resource):
         POST method adds new topic to collection
         """
         if not request.json:
-            return create_error_response(415,"Unsupported media type", "Request must be JSON")
+            return create_error_response(415, "Unsupported media type", "Request must be JSON")
 
         try:
             validate(request.json, BoardBuilder.topic_schema())
@@ -284,7 +284,7 @@ class TopicCollection (Resource):
             return create_error_response(400, "Invalid JSON document", str(e))
 
         new_topic = Topic(
-            id=request.json["id"],
+            #id=request.json["id"],
             header=request.json["header"],
             message=request.json["message"],
             date=request.json["date"],
@@ -346,7 +346,7 @@ class TopicItem (Resource):
         except ValidationError as e:
             return create_error_response(400, "Invalid JSON document", str(e))
 
-        db_topicid.id = request.json["id"]
+        #db_topicid.id = request.json["id"]
         db_topicid.header = request.json["header"]
         db_topicid.message = request.json["message"]
         db_topicid.date = request.json["date"]
@@ -635,6 +635,6 @@ def send_link_relations():
 @app.route("/profiles/<profile>/")
 def send_profile(profile):
     return "you requests {} profile".format(profile)
-#@app.route("/admin/")
-#def admin_site():
-#   return app.send_static_file("html/admin.html")
+@app.route("/admin/")
+def admin_site():
+   return app.send_static_file("html/admin.html")
