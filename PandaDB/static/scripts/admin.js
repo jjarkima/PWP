@@ -36,13 +36,28 @@ function sendData(href, method, item, postProcessor) {
 function sensorRow(item) {
     let link = "<a href='" +
                 item["@controls"].self.href +
-                "' onClick='followLink(event, this, renderSensor)'>show</a>";
-
+                "' onClick='followLink(event, this, renderSensor)'>edit</a>"+
+                " | <a href='" + //uutta
+                item["@controls"].self.href +
+                "' onClick='deleteResource(event, this)'>delete</a>"; //end uutta
+    console.log(item.header+","+item.message+","+item.date+","+item.user_id+","+link);
     return "<tr><td>" + item.header +
             "</td><td>" + item.message +
             "</td><td>" + item.date +
 			"</td><td>" + item.user_id +
             "</td><td>" + link + "</td></tr>";
+}
+
+function messageRow(item) {
+    return "<tr><td>" + item.message +
+            "</td><td>" + item.date +
+            "</td><td>" + item.user_id +
+			"</td><td>" + item.parent_topic_id;
+}
+
+function userRow(item) {
+    return "<tr><td>" + item.name +
+            "</td><td>" + item.password;
 }
 
 function appendSensorRow(body) {
@@ -70,14 +85,42 @@ function submitSensor(event) {
     data.header = $("input[name='header']").val();
     data.message = $("input[name='message']").val();
 	data.date = $("input[name='date']").val();
-	data.user_id = $("input[name='user_id']").val();
+	data.user_id = parseInt($("input[name='user_id']").val());
 	//logger gang
 	console.log(form.attr("action")+","+form.attr("method")+","+JSON.stringify(data));
 	//
     sendData(form.attr("action"), form.attr("method"), data, getSubmittedSensor);
 }
 
-function renderSensorForm(ctrl) {
+function deleteResource(event, a) {
+    event.preventDefault();
+    let resource = $(a);
+    $.ajax({
+        url:resource.attr("href"),
+        type:"DELETE",
+        success: function(){
+            renderMsg("Delete Succesful");
+        },
+        error:renderError
+    });
+    location.reload();
+}
+
+function updateResource(event, a) {
+    event.preventDefault();
+    let resource = $(a);
+    $.ajax({
+        url:resource.attr("href"),
+        type:"PUT",
+        success: function(){
+            renderMsg("Update Succesful");
+        },
+        error:renderError
+    });
+    location.reload(); //not necessary
+}
+
+function renderSensorForm(ctrl,hdr) {
     let form = $("<form>");
     let header = ctrl.schema.properties.header;
     let message = ctrl.schema.properties.message;
@@ -86,6 +129,7 @@ function renderSensorForm(ctrl) {
     form.attr("action", ctrl.href);
     form.attr("method", ctrl.method);
     form.submit(submitSensor);
+    form.append("<label>" + hdr + "</label>");
     form.append("<label>" + header.description + "</label>");
     form.append("<input type='text' name='header'>");
     form.append("<label>" + message.description + "</label>");
@@ -109,13 +153,15 @@ function renderSensor(body) {
     );
     $(".resulttable thead").empty();
     $(".resulttable tbody").empty();
-    renderSensorForm(body["@controls"].edit);
+    $(".resulttable2 thead").empty();
+    $(".resulttable2 tbody").empty();
+    $(".resulttable3 thead").empty();
+    $(".resulttable3 tbody").empty();
+
+    renderSensorForm(body["@controls"].edit,"EDIT TOPIC");
     $("input[name='name']").val(body.name);
     $("input[name='model']").val(body.model);
     $("form input[type='submit']").before(
-        "<label>Location</label>" +
-        "<input type='text' name='location' value='" +
-        body.location + "' readonly>"
     );
 }
 
@@ -130,9 +176,31 @@ function renderSensors(body) {
     body.items.forEach(function (item) {
         tbody.append(sensorRow(item));
     });
-    renderSensorForm(body["@controls"]["board:add-topic"]);
+    renderSensorForm(body["@controls"]["board:add-topic"],"SUBMIT NEW TOPIC");
+}
+
+function renderMessages(body) {
+    $(".resulttable2 thead").html(
+        "<tr><th>message</th><th>date</th><th>user_id</th><th>parent_topic_id</th></tr>"
+    );
+    let tbody = $(".resulttable2 tbody");
+    body.items.forEach(function (item) {
+        tbody.append(messageRow(item));
+    });
+}
+
+function renderUsers(body) {
+    $(".resulttable3 thead").html(
+        "<tr><th>name</th><th>password</th></tr>"
+    );
+    let tbody = $(".resulttable3 tbody");
+    body.items.forEach(function (item) {
+        tbody.append(userRow(item));
+    });
 }
 
 $(document).ready(function () {
     getResource("http://localhost:5000/api/topics/", renderSensors);
+    getResource("http://localhost:5000/api/messages/", renderMessages);
+    getResource("http://localhost:5000/api/users/", renderUsers);
 });
